@@ -82,6 +82,25 @@ const Preview = ({ slices }) => {
   );
 };
 
+const ImgList = () => {
+  return <div className="assets">
+    <h3>Assets:</h3>
+    <div>
+      <img alt='house' src={house} />
+    </div>
+    <div>
+      <img alt='house' src={roof_red} />
+      <img alt='house' src={roof_blue} />
+      <img alt='house' src={roof_highlight} />
+    </div>
+    <div>
+      <img alt='house' src={wall_white} />
+      <img alt='house' src={wall_blue} />
+      <img alt='house' src={wall_highlight} />
+    </div>
+  </div>
+};
+
 function App() {
   const [elements, setElements] = React.useState({});
   const [highlight, setHighlight] = React.useState(null);
@@ -94,7 +113,6 @@ function App() {
   const onHover = React.useCallback((elementId) => {
     setHighlight(elementId);
   }, []);
-  console.debug(elements);
   const slices = React.useMemo(() => {
     let slices = [{ id: "house", img: house }];
     elementsData.forEach((element) => {
@@ -115,10 +133,13 @@ function App() {
     return slices.reverse();
   }, [elements, highlight]);
   return (
-    <div className="app">
-      <Settings onChange={onChange} onHover={onHover} />
-      <Preview slices={slices} />
-    </div>
+    <>
+      <div className="app">
+        <Settings onChange={onChange} onHover={onHover} />
+        <Preview slices={slices} />
+      </div>
+      <ImgList />
+    </>
   );
 }
 
